@@ -1,0 +1,26 @@
+package com.app.core.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.core.service.IStudentService;
+
+@RestController // =@Controller+@ResponseBody
+//on all ret types of req handling methods.
+@RequestMapping("/Stud")
+ // origins=*
+
+public class StudController {
+
+	@Autowired
+	private IStudentService sservice;
+/*
+	public StudController() {
+		super();
+	}
+	
+	
+	*/
+
+}

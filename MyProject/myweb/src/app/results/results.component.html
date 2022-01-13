@@ -1,0 +1,40 @@
+<div class="container-fluid" (click)="getData()">
+    <div class="row" (click)="getDisplay()">
+        <div class="col-2" style="height:100vh;background-color: rgb(188, 217, 241);">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div *ngIf="loggedUser!=null; else elseBlock">
+                <h4>Results</h4>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Subject</th>
+                            <th>LabInternal Marks</th>
+                            <th>LabExam Marks</th>
+                            <th>Theory Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of totaldata">
+                        <tr>
+                            <td>{{item.subjectName}}</td>
+                            <td>{{item.labInternal}}</td>
+                            <td>{{item.labExam}}</td>
+                            <td>{{item.theoryMarks}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #elseBlock>
+                <div [ngClass]="{check:gotoLogin()}">
+
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

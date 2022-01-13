@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="CdacConnect"/>
+<aop-project name="day14.2_spring_boot"/>
+</aop-reference-model>

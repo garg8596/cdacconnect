@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div *ngIf="loggedUser!=null; else elseBlock">
+                <div class="row">
+                    <div class="col-10">
+                        <h4>Complaints</h4>
+                    </div>
+                    <div class="col-2">
+                        <button id="getcform" class="btn btn-primary">New Complaint</button>
+                    </div>
+                </div>
+                <form class="cform" #cForm="ngForm" (ngSubmit)="getNewComplaint(cForm.value)">
+                    <div class="form-group">
+                        <label>Student Prn:</label>
+                        <!-- <label name="studentPrn" [ngModel]="studetprn">{{studetprn}} </label> -->
+                        <input type="text" disabled [ngModel]="studetprn" name="studentPrn" class="form-control"
+                            id="studentprn">
+                        <label>Subject Name</label>
+                        <input type="text" required #sub="ngModel" [class.is-invalid]="sub.invalid && sub.touched"
+                            name="complaintSubjectName" class="form-control" id="sub" ngModel>
+                        <small class="text-danger" [class.d-none]="sub.valid || sub.untouched">Subject is
+                            required.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea rows="10" cols="20" required #desc="ngModel"
+                            [class.is-invalid]="desc.invalid && desc.touched" name="complaintDescription"
+                            class="form-control" id="desc" ngModel></textarea>
+                        <small class="text-danger" [class.d-none]="desc.valid || desc.untouched">Description is
+                            required.</small>
+                    </div>
+                    <button type="submit" [disabled]="cForm.form.invalid" class="btn btn-primary"
+                        name="Submit">Submit</button>&nbsp;&nbsp;
+                    <button type="reset" id="closecform" class="btn btn-secondary">Cancel</button>
+                    <!-- <button type="reset" id="closecform" class="btn btn-secondary">Reset</button> -->
+                </form>
+                <h4>Active Complaints</h4>
+                <table class="table table-hover">
+                    <thead class="thead-dark" (click)="getData()">
+                        <tr>
+                            <th style="width: 80vw;">Subject</th>
+                            <th style="width: 15vw;">Complaint Date</th>
+                            <th style="width: 5vw;"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let item of actComplaints">
+                        <tr>
+                            <td>{{item.complaintSubjectName}}</td>
+                            <td>{{item.complaintDate}}</td>
+                            <td><button class="btn btn-primary" (click)="viewComplaint(item)">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4> Closed Complaints</h4>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 80vw;">Subject</th>
+                            <th style="width: 15vw;">Complaint Date</th>
+                            <th style="width: 5vw;"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of oldComplaints">
+                        <tr>
+                            <td>{{item.complaintSubjectName}}</td>
+                            <td>{{item.complaintDate}}</td>
+                            <td><button class="btn btn-primary" (click)="viewComplaint(item)">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #elseBlock>
+                <div [ngClass]="{check:gotoLogin()}">
+
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

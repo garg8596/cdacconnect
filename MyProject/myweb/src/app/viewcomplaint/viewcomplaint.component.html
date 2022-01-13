@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div class="jumbotron">
+                <h1 style="font-size: 3vh;">{{ studentcomplaints.complaintSubjectName }}</h1>
+                <p class="lead">{{ studentcomplaints.complaintDescription }}</p>
+                <hr class="my-4">
+                <p *ngIf="studentcomplaints.coordComplaint!=null; else elseBlock" class="lead">
+                    {{ studentcomplaints.coordComplaint.complaintReply }}
+                </p>
+                <ng-template #elseBlock>
+                    <p class="lead">
+                        Reply pending from coordinator end...
+                    </p>
+                </ng-template>
+                <hr class="my-4">
+                <button class="btn btn-secondary" (click)="gotoBack()">Back</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div>
+                <div class="row">
+                    <div class="col-10">
+                        <h4>Notices</h4>
+                    </div>
+                    <div class="col-2">
+                        <button id="getcform" class="btn btn-primary">New Notice</button>
+                    </div>
+                </div>
+                <form class="cform" #cForm="ngForm" (ngSubmit)="submitData(cForm.value)">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" required #title="ngModel" [class.is-invalid]="title.invalid && title.touched"
+                            name="title" class="form-control" id="title" ngModel>
+                        <small class="text-danger" [class.d-none]="title.valid || title.untouched">Title is
+                            required.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea rows="10" cols="20" required #desc="ngModel"
+                            [class.is-invalid]="desc.invalid && desc.touched" name="description" class="form-control"
+                            id="desc" ngModel></textarea>
+                        <small class="text-danger" [class.d-none]="desc.valid || desc.untouched">Description is
+                            required.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>PublishedBy</label>
+                        <input type="text" disabled required #publishedBy="ngModel"
+                            [class.is-invalid]="publishedBy.invalid && publishedBy.touched" name="publishedBy"
+                            class="form-control" id="publishedBy" [ngModel]="coordinatorName">
+
+                    </div>
+
+                    <button type="submit" [disabled]="cForm.form.invalid"
+                        class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+                    <button type="reset" id="closecform" class="btn btn-secondary">Cancel</button>
+
+                    <!-- <button type="reset" class="btn btn-secondary">Reset</button> -->
+                </form>
+                <h4>Previous Notices</h4>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 70vw;">Title</th>
+                            <th style="width: 15vw;">Published Date</th>
+                            <th style="width: 5vw;"></th>
+                            <th style="width: 5vw;"></th>
+                            <th style="width: 5vw;"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of cc_notices">
+                        <tr>
+                            <td>{{item.title}}</td>
+                            <td>{{item.publishedDate}}</td>
+                            <td><button class="btn btn-primary" (click)="viewNotice(item)">View</button></td>
+                            <td><button class="btn btn-secondary" (click)="editNotice(item)">Edit</button></td>
+                            <td><button class="btn btn-danger" (click)="removeNotice(item)">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

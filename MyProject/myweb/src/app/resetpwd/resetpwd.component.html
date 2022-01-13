@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>{{id}} {{prn}}
+            <div class="row">
+                <div class="col-6">
+                    <h4>Reset Password</h4>
+                    <form #resetForm="ngForm" (ngSubmit)="Submit(resetForm.value)">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" required #password="ngModel"
+                                [class.is-invalid]="password.invalid && password.touched" name="password"
+                                class="form-control" id="password" ngModel>
+                            <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is
+                                required.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" required #cpass="ngModel"
+                                [class.is-invalid]="cpass.invalid && cpass.touched" name="cpass" class="form-control"
+                                id="cpass" [(ngModel)]="resetModel.cpass">
+                            <small class="text-danger" [class.d-none]="cpass.valid || cpass.untouched">Confirm Password
+                                is required.</small>
+                        </div>
+                        <button type="submit" [disabled]="resetForm.form.invalid"
+                            class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+                        <button (click)="gotoBack()" class="btn btn-secondary">Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

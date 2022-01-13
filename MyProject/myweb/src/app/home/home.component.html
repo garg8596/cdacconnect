@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"
+      style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+      <app-left-sidebar></app-left-sidebar>
+    </div>
+    <div class="col-2">
+
+    </div>
+    <div class="col-10">
+      <div style="padding-top: 25px;">
+        <app-header></app-header>
+      </div>
+      <hr>
+      <hr>
+      <div>
+        <h4>Recent Notices</h4>
+        <div>
+          <table class="table table-hover">
+            <thead class="thead-dark" style="background-color: rgb(188, 217, 241);">
+              <tr>
+                <th style="width: 65vw;">Title</th>
+                <th style="width: 15vw;">Published By</th>
+                <th style="width: 15vw;">Published Date</th>
+                <th style="width: 5vw;">View</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of  notices">
+              <tr>
+                <td>{{item.title}}</td>
+                <td>{{item.publishedBy}}</td>
+                <td>{{item.publishedDate}}</td>
+                <td><button class="btn btn-primary" (click)="viewNotice(item)">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button class="btn btn-primary" (click)="getDisplay()">View</button> -->

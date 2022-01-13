@@ -1,0 +1,116 @@
+package com.app.core.dao;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
+
+import com.app.core.pojos.CourseCoordinator;
+import com.app.core.pojos.Student;
+import com.app.core.pojos.StudentComplaints;
+import com.app.core.pojos.StudentNotices;
+import com.app.core.pojos.StudentOfTheMonth;
+
+
+@Repository
+
+public class StudentDaoImpl implements IStudent {
+
+	
+	@PersistenceContext
+	private EntityManager mgr;
+	
+	@Override
+	public Student validateStudentLogin(int studentPrn, String studentPassword) {
+		String jpql = "select stud from Student stud where studentPrn=:prn and password=:pass";
+		Student ss=mgr.unwrap(Session.class).get(Student.class,studentPrn);
+		return  ss;
+		//return  mgr.unwrap(Session.class).
+			//	createQuery(jpql, Student.class).setParameter("prn",studentPrn).setParameter("pass",studentPassword).getSingleResult();
+	}
+	/*
+	@Override
+	public Student validateSecurityQuestion(int studentPrn, String email, LocalDate dataOfBirth) {
+		String jpql = "select stud from Student stud where prn=:prn and email=:email and coordinatorDateofbirth=:dob";
+		return mgr.unwrap(Session.class).
+				createQuery(jpql, Student.class).setParameter("prn",studentPrn).setParameter("email",email).setParameter("dob",dataOfBirth).getSingleResult();
+	}
+	@Override
+	public Student insertStudentDetails(Student stud) {
+		mgr.unwrap(Session.class).persist(stud);
+		return stud;
+	}
+	@Override
+	public Student updateNewpassword(Student stud) {
+		mgr.unwrap(Session.class).update(stud);
+		
+		
+		return stud;
+	}
+	@Override
+	public List<StudentNotices> getListofNoticeActive() {
+		String jpql = "select studentnotices from StudentNotices studentnotices";
+		return mgr.unwrap(Session.class).
+				createQuery(jpql, StudentNotices.class).getResultList();
+	}
+	@Override
+	public Student getStudentDetails(int studentPrn) {
+		//String jpql = "select cc from  Student cc where studentprn=:courseId";
+	//	return mgr.unwrap(Session.class).
+		//		createQuery(jpql, Student.class).setParameter("courseId",studentPrn).getSingleResult();
+
+		Student ss=mgr.unwrap(Session.class).get(Student.class,studentPrn);
+		return  ss;
+	}
+	@Override
+	public List<StudentNotices> getStudentNotices() {
+		String jpql = "select studnotices from StudentNotices studnotices";
+		return  mgr.createQuery(jpql, StudentNotices.class).getResultList() ;
+	}
+	@Override
+	public List<StudentOfTheMonth> getStomDetails() {
+		String jpql = "select studstom  from StudentOfTheMonth studstom";
+		return  mgr.createQuery(jpql,StudentOfTheMonth.class).getResultList() ;
+	}
+	@Override
+	public StudentComplaints insertComplaints(StudentComplaints sc) {
+		
+		mgr.unwrap(Session.class).persist(sc);
+		return sc;
+	}
+	@Override
+	public List<StudentComplaints> viewComplaints(int studentPrn) {
+	
+		String jpql="select studcomp from StudentComplaints studcomp where prn=:prn";
+		return mgr.unwrap(Session.class).
+				createQuery(jpql, StudentComplaints.class).setParameter("prn",studentPrn).getResultList();
+	}
+	@Override
+	public boolean removeComplaints(StudentComplaints scom) {
+		 
+		mgr.unwrap(Session.class).delete(scom);
+		return true;
+	}
+	@Override
+	public StudentComplaints getComplaint(int complaintId) {
+		
+		
+		return mgr.unwrap(Session.class).get(StudentComplaints.class, complaintId) ;
+	}
+	
+	@Override
+	public StudentComplaints updateComplaint(StudentComplaints scomp) {
+		
+		mgr.unwrap(Session.class).update(scomp);
+		
+		return scomp ;
+	}
+	
+	*/
+
+}

@@ -1,0 +1,5 @@
+package com.app.core.dao;
+
+public interface Istudentdemo {
+
+}

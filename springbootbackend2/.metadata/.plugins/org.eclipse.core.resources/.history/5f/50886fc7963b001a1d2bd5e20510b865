@@ -1,0 +1,12 @@
+package com.app.core.pojos;
+
+public enum Complaint {
+open,closed;
+	
+	@Override
+	public String toString()
+	{
+		return name().toUpperCase();
+	}
+
+}

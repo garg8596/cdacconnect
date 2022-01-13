@@ -1,0 +1,84 @@
+package com.app.core.pojos;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class InternalMarks {
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(value = "internalid")
+	private Integer internalId;
+	@Column(length=20,nullable =false)
+	private int studentPrn;
+	@Column(length=10,unique = true,nullable = false)
+	private int subjectCode;
+	@Column(length=10,nullable = false)
+	private int assignmentMarks;
+	@Column(length=10,nullable = false)
+	private int labExamMarks;
+	@Column(length=30,nullable = false)
+	private ExamStatus studentStatus;
+	public InternalMarks() {
+		super();
+	}
+	public InternalMarks(int studentPrn, int subjectCode, int assignmentMarks, int labExamMarks,
+			ExamStatus studentStatus) {
+		super();
+		this.studentPrn = studentPrn;
+		this.subjectCode = subjectCode;
+		this.assignmentMarks = assignmentMarks;
+		this.labExamMarks = labExamMarks;
+		this.studentStatus = studentStatus;
+	}
+	@Override
+	public String toString() {
+		return "InternalMarks [internalId=" + internalId + ", studentPrn=" + studentPrn + ", subjectCode=" + subjectCode
+				+ ", assignmentMarks=" + assignmentMarks + ", labExamMarks=" + labExamMarks + ", studentStatus="
+				+ studentStatus + "]";
+	}
+	public Integer getInternalId() {
+		return internalId;
+	}
+	public void setInternalId(Integer internalId) {
+		this.internalId = internalId;
+	}
+	public int getStudentPrn() {
+		return studentPrn;
+	}
+	public void setStudentPrn(int studentPrn) {
+		this.studentPrn = studentPrn;
+	}
+	public int getSubjectCode() {
+		return subjectCode;
+	}
+	public void setSubjectCode(int subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+	public int getAssignmentMarks() {
+		return assignmentMarks;
+	}
+	public void setAssignmentMarks(int assignmentMarks) {
+		this.assignmentMarks = assignmentMarks;
+	}
+	public int getLabExamMarks() {
+		return labExamMarks;
+	}
+	public void setLabExamMarks(int labExamMarks) {
+		this.labExamMarks = labExamMarks;
+	}
+	public ExamStatus getStudentStatus() {
+		return studentStatus;
+	}
+	public void setStudentStatus(ExamStatus studentStatus) {
+		this.studentStatus = studentStatus;
+	}
+	
+	
+
+}

@@ -1,0 +1,64 @@
+<div class="container-fluid" (click)="getData();">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div *ngIf="loggedCoordinator!=null; else elseBlock">
+                <h4>Complaints</h4>
+                <h5>Active Complaints</h5>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 10vw;">PRN</th>
+                            <th style="width: 70vw;">Subject</th>
+                            <th style="width: 15vw;">Complaint Date</th>
+                            <th style="width: 5vw;"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of actComplaints">
+                        <tr>
+                            <td>{{item.studentPrn}}</td>
+                            <td>{{item.complaintSubjectName}}</td>
+                            <td>{{item.complaintDate}}</td>
+                            <td><button class="btn btn-primary" (click)="replyComplaint(item)">Reply</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Closed Complaints</h5>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 10vw;">PRN</th>
+                            <th style="width: 70vw;">Subject</th>
+                            <th style="width: 15vw;">Complaint Date</th>
+                            <th style="width: 5vw;"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of oldComplaints">
+                        <tr>
+                            <td>{{item.studentPrn}}</td>
+                            <td>{{item.complaintSubjectName}}</td>
+                            <td>{{item.complaintDate}}</td>
+                            <td><button class="btn btn-primary" (click)="viewComplaint(item)">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #elseBlock>
+                <div [ngClass]="{check:gotoLogin()}">
+
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

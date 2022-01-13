@@ -1,0 +1,78 @@
+package com.app.core.pojos;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+@Entity
+@Table(name="ExternalMarks")
+public class ExternalMarks  implements Serializable {
+	
+	@EmbeddedId
+	@JsonProperty(value = "externalid")
+    private InternalCompositeKey externalkey;
+	private Integer externalId;
+	@Column(length=20,nullable =false)
+	private int studentPrn;
+	@Column(length=10,unique = true,nullable = false)
+	private int subjectCode;
+	@Column(length=10,nullable = false)
+	private int theoryMarks;
+	@Column(length=30,nullable = false)
+	private ExamStatus studentStatus;
+	public ExternalMarks() {
+		super();
+	}
+	public ExternalMarks(int studentPrn, int subjectCode, int theoryMarks, ExamStatus studentStatus) {
+		super();
+		this.studentPrn = studentPrn;
+		this.subjectCode = subjectCode;
+		this.theoryMarks = theoryMarks;
+		this.studentStatus = studentStatus;
+	}
+	@Override
+	public String toString() {
+		return "ExternalMarks [externalId=" + externalId + ", studentPrn=" + studentPrn + ", subjectCode=" + subjectCode
+				+ ", theoryMarks=" + theoryMarks + ", studentStatus=" + studentStatus + "]";
+	}
+	public Integer getExternalId() {
+		return externalId;
+	}
+	public void setExternalId(Integer externalId) {
+		this.externalId = externalId;
+	}
+	public int getStudentPrn() {
+		return studentPrn;
+	}
+	public void setStudentPrn(int studentPrn) {
+		this.studentPrn = studentPrn;
+	}
+	public int getSubjectCode() {
+		return subjectCode;
+	}
+	public void setSubjectCode(int subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+	public int getTheoryMarks() {
+		return theoryMarks;
+	}
+	public void setTheoryMarks(int theoryMarks) {
+		this.theoryMarks = theoryMarks;
+	}
+	public ExamStatus getStudentStatus() {
+		return studentStatus;
+	}
+	public void setStudentStatus(ExamStatus studentStatus) {
+		this.studentStatus = studentStatus;
+	}
+	
+	
+
+}

@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2" style="height:100vh;background-color: rgb(188, 217, 241);">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr><hr>
+            <div>
+                <div class="row">   
+                    <div class="col-10">
+                        <h4>Internal Marks</h4>
+                    </div>
+                    
+                </div>
+                <form class="cform" #cForm="ngForm" (ngSubmit)="submitSotm(cForm.value)">
+                    <div class="form-group">
+                        <label>Student Prn</label>
+                        <input type="number" required #studentPrn="ngModel" [class.is-invalid]="studentPrn.invalid && studentPrn.touched" name="studentPrn"class="form-control" id="title" ngModel>
+                        <small class="text-danger" [class.d-none] ="studentPrn.valid || studentPrn.untouched">Student Prn is required.</small>
+                    </div>
+                     
+                    <div class="form-group">
+                        <label>Assignment Marks</label>
+                        <input type="number" required #assignmentMarks="ngModel" [class.is-invalid]="assignmentMarks.invalid && assignmentMarks.touched" name="assignmentMarks"class="form-control" id="title" ngModel>
+                        <small class="text-danger" [class.d-none] ="assignmentMarks.valid || assignmentMarks.untouched">AssignmentMarks is required.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Lab Marks</label>
+                        <input type="number" required #labExamMarks="ngModel" [class.is-invalid]="labExamMarks.invalid && labExamMarks.touched" name="labExamMarks"class="form-control" id="title" ngModel>
+                        <small class="text-danger" [class.d-none] ="labExamMarks.valid || labExamMarks.untouched">Lab Marks is required.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topic" class="text-info">Select Subject name : &nbsp; </label>
+                        <select (blur)="validateMonth(topic.value)" (change)="validateMonth(topic.value)"  required #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched"  name="subjectCode"  [ngModel]="Subject.SubjectCode">
+                            <option value="">Select Subject Name</option>
+                            <option *ngFor="let subjectname of Subject" value="{{subjectname.SubjectCode}}">{{subjectname.SubjectName}}</option>
+                        </select>
+                        <small  class="text-danger" [class.d-none]="!topicHasError || topic.untouched" >Select Subject Name *</small>  
+                    </div>
+                   
+                    <button type="submit" [disabled]="cForm.form.invalid" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+                    
+                    <button type="reset"  class="btn btn-secondary">Reset</button>
+                
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

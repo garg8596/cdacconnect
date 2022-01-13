@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <!-- {{id}}{{studentStom | json}} -->
+            <div>
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img src="/assets/images/logo.jpeg" class="mr-3" height="250px" width="250px"
+                            alt="Student Image">
+                        <div class="media-body col-6">
+                            <!-- <h6 class="mt-0 mb-1">Month Name: {{studentStom.monthName}}</h6> -->
+                            <b style="font-size: large;" class="mt-0 mb-1">PRN: {{studentStom.studentprn}}</b><br>
+                            <!-- <h6 class="mt-0 mb-1">Name: {{studentStom.studentprn}}</h6> -->
+                            <!-- <h6 class="mt-0 mb-1">Course: {{studentStom.selectedMonthCourse.courseName}}</h6> -->
+                            {{studentStom.description}}<br><br>
+                            <a class="btn btn-secondary" (click)="gotoBack()">Back</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- <div class="col-3">
+                    <div class="card" style="width: 15rem;">
+                        <img class="card-img-top" src="/assets/images/logo.jpeg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{studentStom.monthName}}</h5>
+                            <p class="card-text">PRN: {{studentStom.studentprn}}<br>Name:
+                                {{studentStom.stomId}}<br>Course:{{studentStom.selectedMonthCourse.courseName}}</p>
+                            <hr>
+                            {{studentStom.description}}<br><br>
+                            <a class="btn btn-secondary" (click)="gotoBack()">Back</a>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+</div>

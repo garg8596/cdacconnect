@@ -1,0 +1,9 @@
+package com.app.core.pojos;
+
+public class InternalCompositeKey  implements Serializable{
+	
+	
+	
+	
+
+}

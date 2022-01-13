@@ -1,0 +1,5 @@
+package com.app.core.pojos;
+
+public class StudentTimeTable   {
+
+}

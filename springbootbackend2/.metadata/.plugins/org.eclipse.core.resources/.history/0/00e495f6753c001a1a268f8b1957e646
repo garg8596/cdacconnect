@@ -1,0 +1,84 @@
+package com.app.core.pojos;
+
+import javax.persistence.Column;
+
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name="InternalMarks")
+public class InternalMarks {
+	
+	
+	
+    @EmbeddedId
+    @JsonProperty(value = "internalid")
+	private InternalCompositeKey ickey;
+	@Column(length=10,nullable = false)
+	private int assignmentMarks;
+	@Column(length=10,nullable = false)
+	private int labExamMarks;
+	@Column(length=30,nullable = false)
+	private ExamStatus studentStatus;
+	
+	@ManyToOne()
+	@JoinColumn(name="courseId")
+	//optional BUT reco
+	private CourseCoordinator selectedCourse;
+
+	
+	
+	public InternalMarks() {
+		super();
+	}
+	public InternalMarks(Integer internalId, int assignmentMarks, int labExamMarks, ExamStatus studentStatus) {
+		super();
+		
+		this.assignmentMarks = assignmentMarks;
+		this.labExamMarks = labExamMarks;
+		this.studentStatus = studentStatus;
+	}
+	@Override
+	public String toString() {
+		return "InternalMarks [ickey=" + ickey + ", assignmentMarks=" + assignmentMarks
+				+ ", labExamMarks=" + labExamMarks + ", studentStatus=" + studentStatus + "]";
+	}
+
+	public InternalCompositeKey getIckey() {
+		return ickey;
+	}
+	public void setIckey(InternalCompositeKey ickey) {
+		this.ickey = ickey;
+	}
+	public int getAssignmentMarks() {
+		return assignmentMarks;
+	}
+	public void setAssignmentMarks(int assignmentMarks) {
+		this.assignmentMarks = assignmentMarks;
+	}
+	public int getLabExamMarks() {
+		return labExamMarks;
+	}
+	public void setLabExamMarks(int labExamMarks) {
+		this.labExamMarks = labExamMarks;
+	}
+	public ExamStatus getStudentStatus() {
+		return studentStatus;
+	}
+	public void setStudentStatus(ExamStatus studentStatus) {
+		this.studentStatus = studentStatus;
+	}
+
+	
+	
+
+}

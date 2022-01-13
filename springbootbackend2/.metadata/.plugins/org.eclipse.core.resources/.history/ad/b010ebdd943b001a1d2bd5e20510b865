@@ -1,0 +1,26 @@
+package com.app.core.pojos;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name="Coursecoordinatorcomplaints")
+public class Coursecoordinatorcomplaints extends AbstractEntity  {
+	
+
+	@Column(length=200)
+	private String coordinatorComplaintSubjectName;
+	@Column(length=10000)
+	private String coordinatorcomplaintDescription;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate coordinatorPostDate;
+	@Column(length=20)
+	private Complaint coordinatorComplaintStatus;
+	
+
+}

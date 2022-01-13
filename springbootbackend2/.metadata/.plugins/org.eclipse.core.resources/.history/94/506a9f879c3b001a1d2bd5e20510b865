@@ -1,0 +1,74 @@
+package com.app.core.pojos;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class StudentOfTheMonth  
+{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(value = "stomid")
+	private Integer stomId;
+	@Column(length=50,unique = true,nullable=false)
+	private String monthName;
+	@Column(length=20,unique = true,nullable=false)
+	private int studentprn;
+	@Column(length=50,nullable=false)
+	private String courseName;
+	@Column(length=10000,nullable=false)
+	private String description;
+     // mapping between stom to course
+	
+	public StudentOfTheMonth() {
+		super();
+		System.out.println("Studentof month default constructor");
+	}
+	public StudentOfTheMonth(String monthName, int studentprn, String courseName, String description) {
+		super();
+		this.monthName = monthName;
+		this.studentprn = studentprn;
+		this.courseName = courseName;
+		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "StudentOfTheMonth [monthName=" + monthName + ", studentprn=" + studentprn + ", courseName=" + courseName
+				+ ", description=" + description + "]";
+	}
+	public String getMonthName() {
+		return monthName;
+	}
+	public void setMonthName(String monthName) {
+		this.monthName = monthName;
+	}
+	public int getStudentprn() {
+		return studentprn;
+	}
+	public void setStudentprn(int studentprn) {
+		this.studentprn = studentprn;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCousreName(String courseName) {
+		this.courseName = courseName;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
+	
+	
+
+}

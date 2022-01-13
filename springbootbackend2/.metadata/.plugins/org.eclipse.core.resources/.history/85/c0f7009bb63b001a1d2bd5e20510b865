@@ -1,0 +1,37 @@
+package com.app.core.pojos;
+
+import java.io.Serializable;
+
+public class InternalCompositeKey  implements Serializable{
+		
+	private int  studentPrn ;
+	private int subjectCode;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + acctId;
+		result = prime * result + branchId;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountPK other = (AccountPK) obj;
+		if (acctId != other.acctId)
+			return false;
+		if (branchId != other.branchId)
+			return false;
+		return true;
+	}
+	
+	
+	
+	
+
+}

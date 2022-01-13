@@ -1,0 +1,129 @@
+package com.app.core.controller;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.core.pojos.CourseCoordinator;
+import com.app.core.pojos.Student;
+import com.app.core.pojos.StudentNotices;
+import com.app.core.pojos.StudentOfTheMonth;
+import com.app.core.service.ICoordinatorService;
+
+@RestController // =@Controller+@ResponseBody
+//on all ret types of req handling methods.
+@RequestMapping("/CourseCoordinator")
+@CrossOrigin // origins=*
+public class CoordinatorController {
+
+	
+@Autowired
+ private ICoordinatorService cservice;
+	@PostConstruct
+	public void init() {
+		System.out.println("in init " + cservice);
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> validateLogin(@RequestParam int courseId,@RequestParam String coordinatorPassword ) {
+		System.out.println(" Corrdinator dtls " + courseId);
+          CourseCoordinator CoordinatorDetails = cservice.ValidateLogin(courseId, coordinatorPassword);
+		if (CoordinatorDetails == null)
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<CourseCoordinator>(CoordinatorDetails, HttpStatus.OK);
+	}
+	
+	@GetMapping("/verify")
+	public ResponseEntity<?> getSecurityVerify(@PathVariable int  courseId,@PathVariable String email,@PathVariable LocalDate dateOfBirth) {
+		System.out.println("get course dtls " + courseId);
+	    
+	    try {
+			CourseCoordinator cdetails=cservice.validateSecurityQustion(courseId, email, dateOfBirth);
+			return new ResponseEntity<CourseCoordinator>(cdetails, HttpStatus.OK);
+		} catch (Exception e1) {
+			e1.printStackTrace();// only for debugging
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+    
+	}
+	 @PutMapping("/update")
+		public ResponseEntity<?> updatePassword( @RequestParam int courseId,@RequestParam String coordinatorPassword) {
+			System.out.println("in  courseId " + courseId + " " );
+
+			try {
+				CourseCoordinator coordinator=cservice.getCoordintorDetails(courseId) ;
+				coordinator.setCoordinatorPassword(coordinatorPassword);
+				return new ResponseEntity<CourseCoordinator>(cservice.updateNewpassword(coordinator), HttpStatus.OK);
+			} catch (Exception e1) {
+				e1.printStackTrace();// only for debugging
+				return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+	
+}
+		@PostMapping("/notices")
+		public ResponseEntity<?> insertNoticeDetails(@RequestParam String title,@RequestParam String description ,@RequestParam String postDate,@RequestParam String publishedBy) {
+			System.out.println("get complaintas dtls ");
+	
+			LocalDate lt=LocalDate.parse(postdate);
+		    try {
+		    
+			//	StudentNotices snotices=cservice.insertNotice(new StudentNotices(title,description,,publishedBy));
+				return new ResponseEntity<String>(postDate, HttpStatus.OK);
+			} catch (Exception e1) {
+				e1.printStackTrace();// only for debugging
+				return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+	    
+		}
+		@PostMapping("/sotm")
+		public ResponseEntity<?> insertStomDetails(@RequestParam String monthName,@RequestParam int studentPrn,@RequestParam String courseName ,@RequestParam String description) {
+			
+			System.out.println("get Student prn dtls " + studentPrn);
+		    
+		    try {
+		    
+				StudentOfTheMonth sotm=cservice.insertStomDetails((new StudentOfTheMonth(monthName,studentPrn,description)));
+				return new ResponseEntity<StudentOfTheMonth>(sotm, HttpStatus.OK);
+			} catch (Exception e1) {
+				e1.printStackTrace();// only for debugging
+				return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+	    
+		}
+		
+		@GetMapping("/coordintor/{courseid}")
+public ResponseEntity<?> getcoordinatorDetails(@PathVariable int courseid)  {
+			
+			System.out.println("get course dtls " + courseid);
+		    
+		    try {
+		    
+				CourseCoordinator cc=cservice.getCoordintorDetails(courseid);
+				return new ResponseEntity<CourseCoordinator>(cc, HttpStatus.OK);
+			} catch (Exception e1) {
+				e1.printStackTrace();// only for debugging
+				return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+	    
+		} 
+		
+	
+
+}

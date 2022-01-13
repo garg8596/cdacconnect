@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2" style="height:100vh;background-color: rgb(188, 217, 241);">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div>
+                <div class="row">
+                    <div class="col-10">
+                        <h4>Internal Results</h4>
+                    </div>
+                    <div class="col-2">
+                        <button (click)="createform()" id="getcform" class="btn btn-primary">New Result</button>
+                    </div>
+                </div>
+                <form class="cform" [formGroup]="InternalResultsForm" (submit)="SaveData()">
+                    <b>Subject Name</b>&nbsp;
+                    <input type="text" formControlName="SubjectName">
+                    <label
+                        *ngIf="InternalResultsForm.controls.SubjectName.errors?.required && InternalResultsForm.controls.SubjectName.touched">
+                        Input field is mandatory.
+                    </label>
+
+                    <br><br>
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>PRN</th>
+                                <th>LabInternal Marks(out of 20)</th>
+                                <th>LabExam Marks(out of 40)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr formArrayName="StudentDetails"
+                                *ngFor="let cd of InternalResultsForm.controls.StudentDetails.controls ;let i=index;">
+                                <td formGroupName={{i}}>{{cd.get('studentPrn').value}}</td>
+                                <td formGroupName={{i}}><input type="text" formControlName="labInternal"
+                                        placeholder="" /></td>
+                                <td formGroupName={{i}}><input type="text" formControlName="labExam" placeholder="" />
+                                </td>
+                                <label
+                                    *ngIf="(InternalResultsForm.controls.StudentDetails.controls[i].get('labInternal').errors?.required || InternalResultsForm.controls.StudentDetails.controls[i].get('labExam').errors?.required) &&InternalResultsForm.controls.StudentDetails.controls[i].get('labExam').touched">
+                                    Input field is mandatory.
+                                </label>
+                                <label
+                                    *ngIf="InternalResultsForm.controls.StudentDetails.controls[i].get('labInternal').errors?.min">
+                                    Min is greater than zero.
+                                </label>
+                                <label
+                                    *ngIf="InternalResultsForm.controls.StudentDetails.controls[i].get('labInternal').errors?.max">
+                                    Max is less and equal than 20.
+                                </label>
+                                <label
+                                    *ngIf="InternalResultsForm.controls.StudentDetails.controls[i].get('labExam').errors?.min">
+                                    Min is greater than zero.
+                                </label>
+                                <label
+                                    *ngIf="InternalResultsForm.controls.StudentDetails.controls[i].get('labExam').errors?.max">
+                                    Max is less and equal than 40.
+                                </label>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" [disabled]="InternalResultsForm.get('StudentDetails').invalid"
+                                        class="btn btn-primary" value="Submit" />&nbsp;&nbsp;
+                                    <button type="reset" id="closecform" class="btn btn-secondary">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

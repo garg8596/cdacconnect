@@ -1,0 +1,27 @@
+package com.app.core.dao;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.app.core.pojos.Student;
+import com.app.core.pojos.StudentComplaints;
+import com.app.core.pojos.StudentNotices;
+import com.app.core.pojos.StudentOfTheMonth;
+
+public interface IStudent {
+	
+	
+  public Student  validateStudentLogin(int studentPrn,String studentPassword);
+  public Student  validateSecurityQuestion(int studentPrn,String email,LocalDate dataOfBirth);
+  public Student  insertStudentDetails(Student stud);
+  public  Student updateNewpassword(Student stud);
+  public List<StudentNotices> getListofNoticeActive();
+  public Student  getStudentDetails(int studentPrn);
+  public List<StudentNotices>  getStudentNotices();
+  public List<StudentOfTheMonth> getStomDetails();
+  public StudentComplaints insertComplaints(StudentComplaints sc);
+  public List<StudentComplaints> viewComplaints(int Studentprn);
+  public boolean removeComplaints(StudentComplaints scom);
+  public StudentComplaints getComplaint(int complaintId);
+  public StudentComplaints updateComplaint(StudentComplaints scomp);
+}

@@ -1,0 +1,62 @@
+package com.app.core.pojos;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+@Entity
+@Table(name="ExternalMarks")
+public class ExternalMarks  implements Serializable {
+	
+	@EmbeddedId
+	@JsonProperty(value = "externalid")
+    private InternalCompositeKey externalkey;
+	@Column(length=20,nullable =false)
+	
+	private int theoryMarks;
+	@Column(length=30,nullable = false)
+	private ExamStatus studentStatus;
+	public ExternalMarks() {
+		super();
+	}
+	public ExternalMarks(int theoryMarks,
+			ExamStatus studentStatus) {
+		super();
+			this.theoryMarks = theoryMarks;
+		this.studentStatus = studentStatus;
+	}
+	@Override
+	public String toString() {
+		return "ExternalMarks [externalkey=" + externalkey +", theoryMarks=" + theoryMarks + ", studentStatus=" + studentStatus
+				+ "]";
+	}
+	public InternalCompositeKey getExternalkey() {
+		return externalkey;
+	}
+	public void setExternalkey(InternalCompositeKey externalkey) {
+		this.externalkey = externalkey;
+	}
+	
+	public int getTheoryMarks() {
+		return theoryMarks;
+	}
+	public void setTheoryMarks(int theoryMarks) {
+		this.theoryMarks = theoryMarks;
+	}
+	public ExamStatus getStudentStatus() {
+		return studentStatus;
+	}
+	public void setStudentStatus(ExamStatus studentStatus) {
+		this.studentStatus = studentStatus;
+	}
+	
+	
+
+}

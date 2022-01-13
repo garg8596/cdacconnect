@@ -1,0 +1,36 @@
+package com.app.core.pojos;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name="Coursecoordinatorcomplaints")
+public class Coursecoordinatorcomplaints   {
+	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(value = "coordinatiorComplaintId")
+	private Integer coordinatiorcomplaintid;
+	@Column(length=200,nullable = false)
+	private String coordinatorComplaintSubjectName;
+	@Column(nullable=false)
+	private String coordinatorcomplaintDescription;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate coordinatorPostDate;
+	@Column(length=20,nullable=false)
+	private Complaint coordinatorComplaintStatus;
+	
+
+}

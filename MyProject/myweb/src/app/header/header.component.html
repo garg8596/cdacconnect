@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-10">
+        <h3>CDAC-Connect</h3>
+        <p style="font-size: large;">Stay Updated, Anywhere, Anytime!!!</p>
+    </div>
+    <div class="col-2" *ngIf="loggedInCoordinator == null && loggedInUser == null; else elseBlock">
+        <button routerLink="/login" type="button" class="btn btn-primary">Login</button>&nbsp;
+        <button routerLink="/register" type="button" class="btn btn-primary">Register</button>
+    </div>
+    <ng-template #elseBlock>
+        <div *ngIf="loggedInUser == null; else elseBlock" class="col-2">
+            <div [ngClass]="{check:getDisplay()}">
+                <h6>{{ccdetails.coordinatorName}}</h6>
+                <button (click)="logout()" class="btn btn-primary">Logout</button>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div [ngClass]="{check:getStudDisplay()}" class="col-2">
+                <h6>{{sdetails.studentName}}</h6>
+                <button (click)="logout()" class="btn btn-primary">Logout</button>
+            </div>
+        </ng-template>
+    </ng-template>
+</div>

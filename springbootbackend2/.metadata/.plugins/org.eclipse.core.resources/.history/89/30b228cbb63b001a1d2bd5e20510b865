@@ -1,0 +1,78 @@
+package com.app.core.pojos;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
+public class InternalCompositeKey  implements Serializable{
+		
+	@Column
+	private int  studentPrn ;
+	@Column
+	private int subjectCode;
+	
+	public InternalCompositeKey() {
+		super();
+	}
+	
+	
+	public InternalCompositeKey(int studentPrn, int subjectCode) {
+		super();
+		this.studentPrn = studentPrn;
+		this.subjectCode = subjectCode;
+	}
+
+
+	@Override
+	public String toString() {
+		return "InternalCompositeKey [studentPrn=" + studentPrn + ", subjectCode=" + subjectCode + "]";
+	}
+
+
+	public int getStudentPrn() {
+		return studentPrn;
+	}
+
+
+	public void setStudentPrn(int studentPrn) {
+		this.studentPrn = studentPrn;
+	}
+
+
+	public int getSubjectCode() {
+		return subjectCode;
+	}
+
+
+	public void setSubjectCode(int subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + studentPrn;
+		result = prime * result + subjectCode;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InternalCompositeKey other = (InternalCompositeKey) obj;
+		if (studentPrn != other.studentPrn)
+			return false;
+		if (subjectCode != other.subjectCode)
+			return false;
+		return true;
+	}
+	
+	
+
+}

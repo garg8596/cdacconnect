@@ -1,0 +1,109 @@
+package com.app.core.pojos;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+@Entity
+@Table(name="StudentNotices")
+public class StudentNotices  
+{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(value = "noticeId")
+	private Integer noticeId;
+	@Column(length=500,nullable=false)
+	public String title;
+	@Column(length=15000,nullable=false)
+	public String description;
+	@Column(nullable=false)
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone="IST")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate publishedDate;
+	@Column(length=100,nullable=false)
+	public String publishedBy;
+	
+	// coursecoordinator  with notices
+	 @ManyToOne()
+		@JoinColumn(name="courseId")//optional BUT reco
+	 
+		private CourseCoordinator selectedCourseNotice;
+	public Integer getNoticeId() {
+		return noticeId;
+	}
+	public void setNoticeId(Integer noticeId) {
+		this.noticeId = noticeId;
+	}
+	public CourseCoordinator getSelectedCourseNotice() {
+		return selectedCourseNotice;
+	}
+	public void setSelectedCourseNotice(CourseCoordinator selectedCourseNotice) {
+		this.selectedCourseNotice = selectedCourseNotice;
+	}
+	public StudentNotices() {
+		super();
+		
+		System.out.println("notice default constructor");
+	}
+	@Override
+	public String toString() {
+		return "StudentNotices [title=" + title + ", description=" + description + ", publishedDate=" + publishedDate
+				+ ", publishedBy=" + publishedBy + "]";
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public LocalDate getPublishedDate() {
+		return publishedDate;
+	}
+	public void setPublishedDate(LocalDate publishedDate) {
+		this.publishedDate = publishedDate;
+	}
+	public String getPublishedBy() {
+		return publishedBy;
+	}
+	public void setPublishedBy(String publishedBy) {
+		this.publishedBy = publishedBy;
+	}
+	
+	public StudentNotices(String title, String description, LocalDate publishedDate, String publishedBy) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.publishedDate = publishedDate;
+		this.publishedBy = publishedBy;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

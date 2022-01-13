@@ -1,0 +1,192 @@
+package com.app.core.pojos;
+
+
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name="Student")
+public class Student   {
+	
+	@Id
+	@Column(length=15,unique = true,nullable=false)
+	@JsonProperty(value = "studentPrn")
+	private Integer studentPrn;
+	@Column(length=100,nullable=false)
+	private String studentName;
+	@Column(length=100,nullable=false)
+	private String  courseName;
+	@Column(length=50,unique=true,nullable=false)
+	private  String email ;
+	@Column(length=50)
+	private  String password ;
+	@Column(length=15,nullable=false)
+	private  String phoneNumber ;
+	@Column(length=20,nullable=false)
+	@Enumerated(EnumType.STRING)
+	private Gender studentGender;
+	@Column(nullable = false)
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone="IST")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dateofbirth;
+	@Column(nullable=false)
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone="IST")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate registrationDate;
+	@Column(length=50,nullable=false)
+	@Enumerated(EnumType.STRING)
+	private StudentStatus studentStatus;
+	@Lob
+	private byte[] studentImage;
+	
+	//Mapping coordinator to Student
+	@ManyToOne()
+	@JoinColumn(name="courseId")
+	//optional BUT reco
+	private CourseCoordinator selectedCourse;
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinTable(name = "studentsdetails",joinColumns = @JoinColumn(name="studentPrn"),inverseJoinColumns = @JoinColumn(name="studPrn"))
+	private List<StudentComplaints> studentscomplaints = new ArrayList<>();
+	
+	
+	
+	public Student() {
+		super();
+	}
+	
+	
+	
+	public Student(Integer studentPrn, String studentName, String courseName, String email, String password,
+			String phoneNumber, Gender studentGender, LocalDate dateofbirth, LocalDate registrationDate,
+			StudentStatus studentStatus) {
+		super();
+		this.studentPrn = studentPrn;
+		this.studentName = studentName;
+		this.courseName = courseName;
+		this.email = email;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.studentGender = studentGender;
+		this.dateofbirth = dateofbirth;
+		this.registrationDate = registrationDate;
+		this.studentStatus = studentStatus;
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Student [studentPrn=" + studentPrn + ", studentName=" + studentName + ", courseName=" + courseName
+				+ ", email=" + email + ", password=" + password + ", phoneNumber=" + phoneNumber + ", studentGender="
+				+ studentGender + ", dateofbirth=" + dateofbirth + ", registrationDate=" + registrationDate
+				+ ", studentStatus=" + studentStatus + ", studentImage=" + Arrays.toString(studentImage) + "]";
+	}
+
+	
+	
+	public int getStudentPrn() {
+		return studentPrn;
+	}
+	public void setStudentPrn(int studentPrn) {
+		this.studentPrn = studentPrn;
+	}
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public Gender getStudentGender() {
+		return studentGender;
+	}
+	public void setStudentGender(Gender studentGender) {
+		this.studentGender = studentGender;
+	}
+	public LocalDate getDateofbirth() {
+		return dateofbirth;
+	}
+	public void setDateofbirth(LocalDate dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+	public byte[] getStudentImage() {
+		return studentImage;
+	}
+	public void setStudentImage(byte[] studentImage) {
+		this.studentImage = studentImage;
+	}
+	public StudentStatus getStudentStatus() {
+		return studentStatus;
+	}
+	public void setStudentStatus(StudentStatus studentStatus) {
+		this.studentStatus = studentStatus;
+	}
+	public CourseCoordinator getSelectedCourse() {
+		return selectedCourse;
+	}
+	public void setSelectedCourse(CourseCoordinator selectedCourse) {
+		this.selectedCourse = selectedCourse;
+	}
+	public List<StudentComplaints> getStudentscomplaints() {
+		return studentscomplaints;
+	}
+	public void setStudentscomplaints(List<StudentComplaints> studentscomplaints) {
+		this.studentscomplaints = studentscomplaints;
+	}
+	public void setStudentPrn(Integer studentPrn) {
+		this.studentPrn = studentPrn;
+	}
+
+	
+	
+}

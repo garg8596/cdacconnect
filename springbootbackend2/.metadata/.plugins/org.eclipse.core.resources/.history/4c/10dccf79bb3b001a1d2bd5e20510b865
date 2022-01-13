@@ -1,0 +1,43 @@
+package com.app.core.pojos;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name="StudentTimeTable")
+public class StudentTimeTable   {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty(value = "timetableid")
+	public Integer timeTableId;
+	@Column(nullable = false)
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone="IST")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate scheduledate;
+	@Column()
+	public String type;
+	@Column
+	public String moduleName;
+	@Column
+	public String facultyName;
+	@Column
+	public String venue;
+	@Column
+	public String timing;
+	
+	
+	
+	
+}

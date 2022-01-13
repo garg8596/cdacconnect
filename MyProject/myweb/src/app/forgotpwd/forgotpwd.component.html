@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>{{id}}
+            <div class="row">
+                <div class="col-6">
+                    <h4>Forgot Password</h4>
+                    {{ message}}
+                    <div *ngIf="id=='student'; else elseblock">
+                        <form #forgotForm="ngForm" (ngSubmit)="foregetpasswordStud(forgotForm.value)">
+                            <div class="form-group; else elseblock">
+
+                                <label>Student Prn</label>
+                                <input type="number" required #studentPrn="ngModel"
+                                    [class.is-invalid]="studentPrn.invalid && studentPrn.touched" name="studentPrn"
+                                    ngModel class="form-control" id="email">
+                                <small class="text-danger"
+                                    [class.d-none]="studentPrn.valid || studentPrn.untouched">Student Prn is
+                                    required.</small>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" required #email="ngModel"
+                                    [class.is-invalid]="email.invalid && email.touched" name="email"
+                                    class="form-control" id="email" ngModel>
+                                <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is
+                                    required.</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Date Of Birth</label>
+                                <input type="date" required #dateofbirth="ngModel"
+                                    [class.is-invalid]="dateofbirth.invalid && dateofbirth.touched" name="dateofbirth"
+                                    class="form-control" id="dateofbirth" ngModel>
+                                <small class="text-danger"
+                                    [class.d-none]="dateofbirth.valid || dateofbirth.untouched">Dateofbirth is
+                                    required.</small>
+                            </div>
+                            <button type="submit" [disabled]="forgotForm.form.invalid"
+                                class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+                            <button routerLink="/login" class="btn btn-secondary">Cancel</button>
+                        </form>
+                    </div>
+
+                    <ng-template #elseblock>
+                        <form #forgotForm="ngForm" (ngSubmit)="foregetpasswordcoord(forgotForm.value)">
+                            <div class="form-group; else elseblock">
+
+                                <label>Coordinator Id</label>
+                                <input type="number" required #courseId="ngModel"
+                                    [class.is-invalid]="courseId.invalid && courseId.touched" name="courseId" ngModel
+                                    class="form-control" id="email">
+                                <small class="text-danger"
+                                    [class.d-none]="courseId.valid || courseId.untouched">CoordinatorId is
+                                    required.</small>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" required #cordinatorEmail="ngModel"
+                                    [class.is-invalid]="cordinatorEmail.invalid && cordinatorEmail.touched"
+                                    name="cordinatorEmail" class="form-control" id="cordinatorEmail" ngModel>
+                                <small class="text-danger"
+                                    [class.d-none]="cordinatorEmail.valid || cordinatorEmail.untouched">Email is
+                                    required.</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Date Of Birth</label>
+                                <input type="date" required #coordinatorDateofbirth="ngModel"
+                                    [class.is-invalid]="coordinatorDateofbirth.invalid && coordinatorDateofbirth.touched"
+                                    name="coordinatorDateofbirth" class="form-control" id="coordinatorDateofbirth"
+                                    ngModel>
+                                <small class="text-danger"
+                                    [class.d-none]="coordinatorDateofbirth.valid || coordinatorDateofbirth.untouched">DateOfBirth
+                                    is required.</small>
+                            </div>
+                            <button type="submit" [disabled]="forgotForm.form.invalid" class="btn btn-primary"
+                                >Submit</button>&nbsp;&nbsp;
+                            <button routerLink="/login" class="btn btn-secondary">Cancel</button>
+                        </form>
+
+
+
+
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<!-- <p>cc-studentdata works!</p>
+
+{{studentDetails | json}} -->
+
+<div class="container-fluid" (click)="getData();">
+    <div class="row">
+        <div class="col-2"
+            style="height:100vh;background-color: rgb(188, 217, 241);overflow-x: hidden;position: fixed;z-index: 1;">
+            <app-left-sidebar></app-left-sidebar>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-10">
+            <div style="padding-top: 25px;">
+                <app-header></app-header>
+            </div>
+            <hr>
+            <hr>
+            <div>
+                <h4>Students List</h4>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 10vw;">PRN</th>
+                            <th style="width: 10vw;">Student Name</th>
+                            <th style="width: 10vw;">Email Id</th>
+                            <th style="width: 10vw;">Phone No.</th>
+                            <th style="width: 10vw;">Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of studentDetails">
+                        <tr>
+                            <td>{{item.studentPrn}}</td>
+                            <td>{{item.studentName}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.phoneNumber}}</td>
+                            <td>{{item.studentStatus}}</td>
+                            <td><button *ngIf="item.studentStatus == 'unverified'" class="btn btn-primary"
+                                    (click)="verifyStudent(item)">Verify</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
